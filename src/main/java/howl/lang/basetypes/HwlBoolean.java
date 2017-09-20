@@ -3,7 +3,7 @@ package howl.lang.basetypes;
 import howl.lang.parser.statements.Argument;
 
 public class HwlBoolean implements Argument<Boolean> {
-    private boolean value;
+    private final boolean value;
 
     public HwlBoolean(boolean bool) {
         value = bool;

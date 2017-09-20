@@ -3,7 +3,7 @@ package howl.lang.basetypes;
 import howl.lang.parser.statements.Argument;
 
 public class HwlString implements Argument<String>{
-    private String value;
+    private final String value;
 
     public HwlString(String argumentString) {
 

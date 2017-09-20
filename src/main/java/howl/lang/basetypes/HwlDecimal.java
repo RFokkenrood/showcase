@@ -5,7 +5,7 @@ import howl.lang.parser.statements.Argument;
 import java.math.BigDecimal;
 
 public class HwlDecimal implements Argument<BigDecimal>{
-    private BigDecimal value;
+    private final BigDecimal value;
     public HwlDecimal(String argumentString) {
         value = new BigDecimal(argumentString);
     }

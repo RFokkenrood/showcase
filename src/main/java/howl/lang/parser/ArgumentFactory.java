@@ -19,9 +19,9 @@ class ArgumentFactory {
             return getArgument(argumentString.substring(0, argumentString.indexOf("=="))).hwlEquals(getArgument(argumentString.substring(argumentString.indexOf("==") + 2)));
         } else if (argumentString.matches("(?:true|false|&|\\s|\\||!)+")) {
             return getHwlBoolean(argumentString);
-        } else if (argumentString.matches("[0-9*/%+\\-\\(\\)\\s^]+")) {
+        } else if (argumentString.matches("[0-9*/%+\\-()\\s^]+")) {
             return getHwlInt(argumentString);
-        } else if (argumentString.matches("[0-9*/%+\\-\\(\\)\\s^\\.]+")) {
+        } else if (argumentString.matches("[0-9*/%+\\-()\\s^.]+")) {
             return new HwlDecimal(argumentString);
         } else {
             return new HwlUndefined();

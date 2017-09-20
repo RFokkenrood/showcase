@@ -40,11 +40,6 @@ public class ParserIT {
         assertPrinted("gonna mess with how (i know) the parser works");
     }
 
-    @Test
-    public void checkDecimal(){
-        assertPrinted("4.0");
-    }
-
     private Matcher<String> hasPrinted(String substring) {
         return containsString(substring + System.lineSeparator());
     }

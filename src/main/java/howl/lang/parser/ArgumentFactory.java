@@ -43,10 +43,10 @@ class ArgumentFactory {
         }
     }
 
-    private static HwlInt getHwlInt(String input) {
+    private static HwlInteger getHwlInt(String input) {
         String argumentString = input.trim();
         if (argumentString.matches("[0-9]+")) {
-            return new HwlInt(parseInt(argumentString));
+            return new HwlInteger(parseInt(argumentString));
         } else if (argumentString.contains("+")) {
             return getHwlInt(argumentString.substring(0, argumentString.indexOf("+"))).plus(getHwlInt(argumentString.substring(argumentString.indexOf("+") + 1)));
         } else if (argumentString.contains("-")) {

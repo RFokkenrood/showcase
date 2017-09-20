@@ -35,5 +35,4 @@ public class HwlBoolean implements Argument<Boolean> {
     public HwlBoolean not() {
         return new HwlBoolean(!value);
     }
-
 }

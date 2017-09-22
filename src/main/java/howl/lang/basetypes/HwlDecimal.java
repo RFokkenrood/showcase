@@ -5,6 +5,8 @@ import howl.lang.parser.statements.Argument;
 
 import java.math.BigDecimal;
 
+import static java.math.RoundingMode.HALF_UP;
+
 public class HwlDecimal implements Argument<BigDecimal>,HwlNumber<HwlDecimal> {
     private final BigDecimal value;
 
@@ -33,8 +35,8 @@ public class HwlDecimal implements Argument<BigDecimal>,HwlNumber<HwlDecimal> {
     }
 
     @Override
-    public HwlDecimal over(HwlDecimal aFor) {
-        return null;
+    public HwlDecimal over(HwlDecimal hwlDec) {
+        return new HwlDecimal(value.divide(hwlDec.value, HALF_UP));
     }
 
     @Override

@@ -2,9 +2,11 @@ package howl.lang.parser;
 
 import howl.lang.HwlRunner;
 import org.hamcrest.Matcher;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -13,22 +15,30 @@ import java.io.PrintStream;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
+import static org.junit.rules.ExpectedException.*;
 
 public class IntegerIT {
-    private static ByteArrayOutputStream captureOut;
-    private static PrintStream nativeOut;
+    private ByteArrayOutputStream captureOut;
+    private PrintStream nativeOut;
 
-    @BeforeClass
-    public static void captureSystemOut() throws IOException {
+    @Rule
+    public ExpectedException exception = none();
+
+    @Before
+    public void captureSystemOut() {
         nativeOut = System.out;
         captureOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(captureOut));
-        File file = new File(ParserIT.class.getClassLoader().getResource("howl/lang/parser/int-test-file.hwl").getFile());
-        HwlRunner.main(file.getCanonicalPath());
+    }
+
+    @After
+    public void restoreSystemOut() {
+        System.setOut(nativeOut);
     }
 
     @Test
-    public void checkInt(){
+    public void checkInt() throws IOException {
+        runFile("int-test-file.hwl");
         assertPrinted("5");
         assertPrinted("8");
         assertPrinted("10");
@@ -53,16 +63,23 @@ public class IntegerIT {
         assertPrinted("100");
     }
 
+    @Test
+    public void devBy0() throws IOException {
+        exception.expect(ArithmeticException.class);
+        exception.expectMessage("/ by zero");
+        runFile("devBy0.hwl");
+    }
+
+    private void runFile(String filename) throws IOException {
+        File file = new File(ParserIT.class.getClassLoader().getResource("howl/lang/parser/integer_test/" + filename).getFile());
+        HwlRunner.main(file.getCanonicalPath());
+    }
+
     private Matcher<String> hasPrinted(String substring) {
         return containsString(substring + System.lineSeparator());
     }
 
     private void assertPrinted(String substring) {
         assertThat(captureOut.toString(), hasPrinted(substring));
-    }
-
-    @AfterClass
-    public static void restoreSystemOut(){
-        System.setOut(nativeOut);
     }
 }

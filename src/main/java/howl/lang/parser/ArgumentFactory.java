@@ -3,6 +3,8 @@ package howl.lang.parser;
 import howl.lang.basetypes.*;
 import howl.lang.parser.statements.Argument;
 
+import java.math.BigDecimal;
+
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 
@@ -22,7 +24,7 @@ class ArgumentFactory {
         } else if (argumentString.matches("[0-9*/%+\\-()\\s^]+")) {
             return getHwlInt(argumentString);
         } else if (argumentString.matches("[0-9*/%+\\-()\\s^.]+")) {
-            return new HwlDecimal(argumentString);
+            return getHwlDec(argumentString);
         } else {
             return new HwlUndefined();
         }
@@ -44,24 +46,12 @@ class ArgumentFactory {
     }
 
     private static HwlInteger getHwlInt(String input) {
-        String argumentString = input.trim();
-        if (argumentString.matches("[0-9]+")) {
-            return new HwlInteger(parseInt(argumentString));
-        } else if (argumentString.contains("+")) {
-            return getHwlInt(argumentString.substring(0, argumentString.indexOf("+"))).plus(getHwlInt(argumentString.substring(argumentString.indexOf("+") + 1)));
-        } else if (argumentString.contains("-")) {
-            return getHwlInt(argumentString.substring(0, argumentString.lastIndexOf("-"))).minus(getHwlInt(argumentString.substring(argumentString.lastIndexOf("-") + 1)));
-        } else if (argumentString.contains("*")) {
-            return getHwlInt(argumentString.substring(0, argumentString.indexOf("*"))).times(getHwlInt(argumentString.substring(argumentString.indexOf("*") + 1)));
-        } else if (argumentString.contains("/")) {
-            return getHwlInt(argumentString.substring(0, argumentString.lastIndexOf("/"))).over(getHwlInt(argumentString.substring(argumentString.lastIndexOf("/") + 1)));
-        } else if (argumentString.contains("%")) {
-            return getHwlInt(argumentString.substring(0, argumentString.indexOf("%"))).modulo(getHwlInt(argumentString.substring(argumentString.indexOf("%") + 1)));
-        } else if (argumentString.contains("^")) {
-            return getHwlInt(argumentString.substring(0, argumentString.indexOf("^"))).power(getHwlInt(argumentString.substring(argumentString.indexOf("^") + 1)));
-        } else {
-            throw new OperationNotImplemented();
-        }
+        return new MathLiteralParser<>("-?[0-9]+", s -> new HwlInteger(parseInt(s))).getFor(input);
+
+    }
+
+    private static HwlDecimal getHwlDec(String input) {
+        return new MathLiteralParser<>("-?[0-9.]+", s -> new HwlDecimal(new BigDecimal(s))).getFor(input);
     }
 
     private static class OperationNotImplemented extends RuntimeException {

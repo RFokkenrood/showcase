@@ -1,11 +1,12 @@
 package howl.lang.basetypes;
 
 
+import howl.lang.parser.HwlNumber;
 import howl.lang.parser.statements.Argument;
 
 import static java.lang.Math.pow;
 
-public class HwlInteger implements Argument<Long> {
+public class HwlInteger implements Argument<Long>, HwlNumber<HwlInteger> {
 
     private final long value;
 

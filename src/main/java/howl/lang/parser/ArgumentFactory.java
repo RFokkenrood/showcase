@@ -45,7 +45,7 @@ class ArgumentFactory {
         }
     }
 
-    private static HwlInteger getHwlInt(String input) {
+    static HwlInteger getHwlInt(String input) {
         return new MathLiteralParser<>("-?[0-9]+", s -> new HwlInteger(parseInt(s))).getFor(input);
 
     }

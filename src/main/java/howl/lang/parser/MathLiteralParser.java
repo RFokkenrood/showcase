@@ -2,6 +2,8 @@ package howl.lang.parser;
 
 import java.util.function.Function;
 
+import static howl.lang.parser.ArgumentFactory.getHwlInt;
+
 class MathLiteralParser<T extends HwlNumber<T>> {
     private Function<String, T> numberCreator;
     private String numberTypeRegex;
@@ -26,7 +28,7 @@ class MathLiteralParser<T extends HwlNumber<T>> {
         } else if (argumentString.contains("%")) {
             return getFor(argumentString.substring(0, argumentString.lastIndexOf("%"))).modulo(getFor(argumentString.substring(argumentString.lastIndexOf("%") + 1)));
         } else if (argumentString.contains("^")) {
-            return getFor(argumentString.substring(0, argumentString.indexOf("^"))).power(getFor(argumentString.substring(argumentString.indexOf("^") + 1)));
+            return getFor(argumentString.substring(0, argumentString.indexOf("^"))).power(getHwlInt(argumentString.substring(argumentString.indexOf("^") + 1)));
         } else {
             throw new OperationNotImplemented();
         }

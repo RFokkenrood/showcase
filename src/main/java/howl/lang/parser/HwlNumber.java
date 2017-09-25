@@ -1,15 +1,17 @@
 package howl.lang.parser;
 
+import howl.lang.basetypes.HwlInteger;
+
 public interface HwlNumber<T> {
     T plus(T number);
 
-    T minus(T aFor);
+    T minus(T number);
 
-    T times(T aFor);
+    T times(T number);
 
-    T over(T aFor);
+    T over(T number);
 
-    T modulo(T aFor);
+    T modulo(T number);
 
-    T power(T aFor);
+    T power(HwlInteger integer);
 }

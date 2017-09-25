@@ -40,13 +40,14 @@ public class HwlDecimal implements Argument<BigDecimal>,HwlNumber<HwlDecimal> {
     }
 
     @Override
-    public HwlDecimal modulo(HwlDecimal aFor) {
-        return null;
+    public HwlDecimal modulo(HwlDecimal hwlDec) {
+        return new HwlDecimal(value.remainder(hwlDec.value));
     }
 
     @Override
-    public HwlDecimal power(HwlDecimal aFor) {
-        return null;
+    public HwlDecimal power(HwlInteger hwlDec) {
+
+        return new HwlDecimal(value.pow(hwlDec.value().intValue()));
     }
 
     @Override

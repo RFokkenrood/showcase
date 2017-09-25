@@ -36,6 +36,8 @@ public class DecimalIT {
         assertPrinted("12.5");
         assertPrinted("15.0");
         assertPrinted("2.55");
+        assertPrinted("0.2");
+        assertPrinted("1.21");
     }
 
     private Matcher<String> hasPrinted(String substring) {

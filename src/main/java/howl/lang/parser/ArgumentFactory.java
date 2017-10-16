@@ -12,7 +12,7 @@ class ArgumentFactory {
 
     static Argument getArgument(String in) {
         String argumentString = in.trim();
-        if (argumentString.startsWith("\"") || argumentString.startsWith("'")) {
+        if (argumentString.startsWith("\"") || argumentString.startsWith("'") || argumentString.startsWith("@raw")) {
             return new HwlString(argumentString);
         } else if (argumentString.contains("(")) {
             String partInBrackets = argumentString.substring(argumentString.indexOf("(") + 1, argumentString.indexOf(")"));

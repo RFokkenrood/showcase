@@ -6,6 +6,8 @@ import howl.lang.parser.StatementExecuter;
 
 public class HwlRunner {
     public static void main(String... args){
-        FileReader.getLines(args).map(LineParser::parse).forEach(StatementExecuter::execute);
+        FileReader.getLines(args)
+                .map(LineParser::parse)
+                .forEach(StatementExecuter::execute);
     }
 }

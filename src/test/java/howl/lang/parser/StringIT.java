@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.*;
 
+import static java.lang.System.lineSeparator;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -15,6 +16,7 @@ import static org.junit.Assert.assertThat;
 public class StringIT {
     private ByteArrayOutputStream captureOut;
     private PrintStream nativeOut;
+    private String ln = lineSeparator();
 
     @Before
     public void captureSystemOut() {
@@ -35,7 +37,13 @@ public class StringIT {
     @Test
     public void printTextContainingCode() throws IOException {
         executeFile("text-containing-code.hwl");
-        assertEquals("someMethod(\"string argument\").othermethod();\n", captureOut.toString());
+        assertEquals("someMethod(\"string argument\").othermethod();" + ln, captureOut.toString());
+    }
+
+    @Test
+    public void printRawString()throws IOException{
+        executeFile("raw.hwl");
+        assertEquals(captureOut.toString(),"th@t'$ );" + ln +"\tS\"ome @endraw@" + ln + "\t\tn@$$y"+ ln + "    @raw@ text " + ln, captureOut.toString());
     }
 
     @After
@@ -44,7 +52,7 @@ public class StringIT {
     }
 
     private Matcher<String> hasPrinted(String substring) {
-        return containsString(substring + System.lineSeparator());
+        return containsString(substring + lineSeparator());
     }
 
     private void assertPrinted(String substring) {

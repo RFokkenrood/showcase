@@ -1,0 +1,4 @@
+print(@raw@th@t'$ );
+	S"ome \@endraw@
+		n@$$y
+    @raw@ text @endraw@);

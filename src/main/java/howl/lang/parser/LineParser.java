@@ -8,7 +8,7 @@ public class LineParser {
     }
 
     private static Argument getArgument(String statementString) {
-        return ArgumentFactory.getArgument(statementString.substring(statementString.indexOf("(") +1, statementString.indexOf(");")));
+        return ArgumentFactory.getArgument(statementString.substring(statementString.indexOf("(") +1, statementString.lastIndexOf(");")));
     }
 
     private static String getVerb(String statementString) {

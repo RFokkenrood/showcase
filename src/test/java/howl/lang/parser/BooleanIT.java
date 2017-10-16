@@ -143,7 +143,7 @@ public class BooleanIT {
     private void executeFile(String fileName) throws IOException {
         File file;
         try {
-            file = new File(ParserIT.class.getClassLoader().getResource("howl/lang/parser/boolean_test/" + fileName).getFile());
+            file = new File(UndefinedIT.class.getClassLoader().getResource("howl/lang/parser/boolean_test/" + fileName).getFile());
         } catch (NullPointerException e){
             throw new FileNotFoundException("howl/lang/parser/boolean_test/" + fileName);
         }

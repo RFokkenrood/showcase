@@ -23,7 +23,7 @@ public class DecimalIT {
         nativeOut = System.out;
         captureOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(captureOut));
-        File file = new File(ParserIT.class.getClassLoader().getResource("howl/lang/parser/dec-test-file.hwl").getFile());
+        File file = new File(UndefinedIT.class.getClassLoader().getResource("howl/lang/parser/dec-test-file.hwl").getFile());
         HwlRunner.main(file.getCanonicalPath());
     }
 

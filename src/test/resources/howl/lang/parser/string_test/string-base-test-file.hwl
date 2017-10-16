@@ -1,5 +1,3 @@
-print("passed");
 print("I contain 'single quotes' and even escaped \"double quotes\" ");
 print('\'single quotes\' and "double quotes" are interchangable, only the quote type for the strings needs to be quoted');
 print("gonna mess with how (i know) the parser works");
-print(undefined);

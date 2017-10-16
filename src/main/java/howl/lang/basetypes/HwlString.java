@@ -2,6 +2,8 @@ package howl.lang.basetypes;
 
 import howl.lang.parser.statements.Argument;
 
+import static java.util.Arrays.stream;
+
 public class HwlString implements Argument<String>{
     private final String value;
 
@@ -33,10 +35,9 @@ public class HwlString implements Argument<String>{
     }
 
     private String getQuotationType(String string){
-        for(String q : new String[]{"\"", "'"}){
-            if (string.startsWith(q)){
-                return q;
-            }
-        } return null;
+        return stream(new String[]{"\"", "'"})
+                .filter(string::startsWith)
+                .findFirst()
+                .orElse(null);
     }
 }

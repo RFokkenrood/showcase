@@ -71,7 +71,7 @@ public class IntegerIT {
     }
 
     private void runFile(String filename) throws IOException {
-        File file = new File(ParserIT.class.getClassLoader().getResource("howl/lang/parser/integer_test/" + filename).getFile());
+        File file = new File(UndefinedIT.class.getClassLoader().getResource("howl/lang/parser/integer_test/" + filename).getFile());
         HwlRunner.main(file.getCanonicalPath());
     }
 

@@ -1,0 +1,1 @@
+print("someMethod(\"string argument\").othermethod();");
